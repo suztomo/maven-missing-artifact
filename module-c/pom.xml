@@ -12,7 +12,7 @@
 
   <artifactId>module-c</artifactId>
 
-  <name>module-c</name>
+  <name>module-c that fails to run Maven</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,10 +31,12 @@
     </dependency>
   </dependencies>
 
+  <!-- The only difference from module-b -->
   <repositories>
     <repository>
       <id>codehaus</id>
       <name>Retired Repository</name>
+      <!-- This website has been retired -->
       <url>http://repository.codehaus.org/</url>
       <layout>default</layout>
     </repository>

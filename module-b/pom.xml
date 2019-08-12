@@ -12,7 +12,7 @@
 
   <artifactId>module-b</artifactId>
 
-  <name>module-b</name>
+  <name>module-b that succeeds Maven</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
