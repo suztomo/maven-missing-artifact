@@ -32,10 +32,10 @@ Keep `artifact-to-be-removed:2.0` in the local repository.
 
 ## module-b succeeds to run Maven
 
-Module-b depends on module-a and `artifact-to-be-removed:2.0`.
+Module-b depends on module-a and `artifact-to-be-removed:2.0`. Module-b succeeds to run Maven.
 
-Even without `artifact-to-be-removed:1.0` used by module-a, module-b succeeds to run Maven,
-because the final dependency graph only needs `module-a` and `artifact-to-be-removed:2.0`.
+The absence of `artifact-to-be-removed:1.0` is not significant, because the final dependency graph
+only needs `module-a` and `artifact-to-be-removed:2.0`, both of which exist in local Maven repository.
 
 It just outputs warning message for missing `artifact-to-be-removed:1.0`.
 
@@ -55,9 +55,11 @@ $ mvn install
 
 ## module-c fails to run Maven
 
-On the other hand, module-c fails to run Maven upon the error `Unknown host snapshots.maven.codehaus.org`,
-even though the final dependency graph only needs `module-a` and `artifact-to-be-removed:2.0`, both
-of which are available in local Maven repository.
+Module-c also depends on module-a and `artifact-to-be-removed:2.0`. Module-b fails to run Maven.
+
+Module-c gets the error `Unknown host snapshots.maven.codehaus.org`, even though the final dependency
+graph would only need `module-a` and `artifact-to-be-removed:2.0`, both of which are available in local
+Maven repository.
 
 ```
 [INFO] ------------------------------------------------------------------------
