@@ -1,3 +1,6 @@
+This repository demonstrates how having repository section affects Maven's dependency resolution
+even when a missing dependency is unnecessary in final dependency graph.
+
 # Setup
 
 Install the modules into local repository.
@@ -21,16 +24,20 @@ Remove `artifact-to-be-removed:1.0` from local repository.
 $ rm -rf ~/.m2/repository/suztomo/artifact-to-be-removed/1.0
 ```
 
-Now module-a does not have its dependency `artifact-to-be-removed:1.0`.
+Now module-a's dependency `artifact-to-be-removed:1.0` is missing.
 
-Keep `artifact-to-be-removed:2.0` there.
+Keep `artifact-to-be-removed:2.0` in the local repository.
 
-# module-b succeeds to run Maven
+# Comparison between module-b and module-c
+
+## module-b succeeds to run Maven
 
 Module-b depends on module-a and `artifact-to-be-removed:2.0`.
 
 Even without `artifact-to-be-removed:1.0` used by module-a, module-b succeeds to run Maven,
-because Maven ignores the missing dependency. It just outputs warning message.
+because the final dependency graph only needs `module-a` and `artifact-to-be-removed:2.0`.
+
+It just outputs warning message for missing `artifact-to-be-removed:1.0`.
 
 ```
 $ cd module-b
@@ -46,11 +53,11 @@ $ mvn install
 [INFO] ------------------------------------------------------------------------
 ```
 
-# module-c fails to run Maven
+## module-c fails to run Maven
 
-Module-c fails to run Maven.
-
-The only difference between module-b and module-c is repository section in the pom.
+On the other hand, module-c fails to run Maven upon the error `Unknown host snapshots.maven.codehaus.org`,
+even though the final dependency graph only needs `module-a` and `artifact-to-be-removed:2.0`, both
+of which are available in local Maven repository.
 
 ```
 [INFO] ------------------------------------------------------------------------
@@ -61,4 +68,30 @@ The only difference between module-b and module-c is repository section in the p
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal on project module-c: Could not resolve dependencies for project suztomo:module-c:jar:1.0-SNAPSHOT: Failed to collect dependencies at suztomo:module-a:jar:1.0 -> suztomo:artifact-to-be-removed:jar:1.0: Failed to read artifact descriptor for suztomo:artifact-to-be-removed:jar:1.0: Could not transfer artifact suztomo:artifact-to-be-removed:pom:1.0 from/to codehausSnapshots (http://snapshots.maven.codehaus.org/maven2): snapshots.maven.codehaus.org: Name or service not known: Unknown host snapshots.maven.codehaus.org: Name or service not known -> [Help 1]
 [ERROR] 
+```
+
+The only difference between module-b and module-c is repository section in the pom.
+
+```
+$ diff module-b/pom.xml module-c/pom.xml
+13c13
+<   <artifactId>module-b</artifactId>
+---
+>   <artifactId>module-c</artifactId>
+15c15
+<   <name>module-b that succeeds Maven</name>
+---
+>   <name>module-c that fails to run Maven</name>
+32a33,43
+> 
+>   <!-- The only difference from module-b -->
+>   <repositories>
+>     <repository>
+>       <id>codehaus</id>
+>       <name>Retired Repository</name>
+>       <!-- This website has been retired -->
+>       <url>http://repository.codehaus.org/</url>
+>       <layout>default</layout>
+>     </repository>
+>   </repositories>
 ```
