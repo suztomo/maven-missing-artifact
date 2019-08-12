@@ -18,7 +18,7 @@ $ mvn install
 [INFO] module-c 1.0-SNAPSHOT .............................. SUCCESS [  0.048 s]
 ```
 
-Remove `artifact-to-be-removed:1.0` from local repository.
+Remove `artifact-to-be-removed:1.0` from local repository:
 
 ```
 $ rm -rf ~/.m2/repository/suztomo/artifact-to-be-removed/1.0
@@ -26,9 +26,11 @@ $ rm -rf ~/.m2/repository/suztomo/artifact-to-be-removed/1.0
 
 Now module-a's dependency `artifact-to-be-removed:1.0` is missing.
 
-Keep `artifact-to-be-removed:2.0` in the local repository.
+(Keep `artifact-to-be-removed:2.0` in the local repository.)
 
 # Comparison between module-b and module-c
+
+Now let's run comparison between module-b and module-c. Both have the same dependency section.
 
 ## module-b succeeds to run Maven
 
