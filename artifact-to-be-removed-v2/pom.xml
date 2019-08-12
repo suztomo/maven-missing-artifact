@@ -13,14 +13,10 @@
   <artifactId>artifact-to-be-removed</artifactId>
   <version>2.0</version>
 
-  <name>artifact-to-be-removed</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <name>artifact-to-be-removed v2 is not to be removed</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
 </project>

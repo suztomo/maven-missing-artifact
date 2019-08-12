@@ -10,9 +10,9 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>module-b</artifactId>
+  <artifactId>module-c</artifactId>
 
-  <name>module-b</name>
+  <name>module-c</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,4 +30,13 @@
       <version>2.0</version>
     </dependency>
   </dependencies>
+
+  <repositories>
+    <repository>
+      <id>codehausSnapshots</id>
+      <name>Codehaus Snapshots</name>
+      <url>http://snapshots.maven.codehaus.org/maven2</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
 </project>
