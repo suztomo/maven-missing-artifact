@@ -3,7 +3,7 @@ even when a missing dependency is unnecessary in final dependency graph.
 
 # Setup
 
-Install the modules into local repository.
+1. Install the modules into local repository.
 
 ```
 $ pwd
@@ -18,7 +18,7 @@ $ mvn install
 [INFO] module-c 1.0-SNAPSHOT .............................. SUCCESS [  0.048 s]
 ```
 
-Remove `artifact-to-be-removed:1.0` from local repository:
+2. Remove `artifact-to-be-removed:1.0` from local repository:
 
 ```
 $ rm -rf ~/.m2/repository/suztomo/artifact-to-be-removed/1.0
