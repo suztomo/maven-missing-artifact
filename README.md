@@ -99,3 +99,8 @@ $ diff module-b/pom.xml module-c/pom.xml
 >     </repository>
 >   </repositories>
 ```
+
+Note that your module-c may not get the expected failure if your network is configured to return
+a special web page for HTTP requests with unknown hosts. This happened to my home internet (
+[Why did My MacBook Pro return different result?](
+https://github.com/GoogleCloudPlatform/cloud-opensource-java/issues/834#issuecomment-519585027))
