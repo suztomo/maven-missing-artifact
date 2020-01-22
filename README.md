@@ -3,7 +3,7 @@ even when a missing dependency is unnecessary in final dependency graph.
 
 # Setup
 
-Install the modules into local repository.
+1. Install the modules into local repository.
 
 ```
 $ pwd
@@ -18,7 +18,7 @@ $ mvn install
 [INFO] module-c 1.0-SNAPSHOT .............................. SUCCESS [  0.048 s]
 ```
 
-Remove `artifact-to-be-removed:1.0` from local repository:
+2. Remove `artifact-to-be-removed:1.0` from local repository:
 
 ```
 $ rm -rf ~/.m2/repository/suztomo/artifact-to-be-removed/1.0
@@ -99,3 +99,8 @@ $ diff module-b/pom.xml module-c/pom.xml
 >     </repository>
 >   </repositories>
 ```
+
+Note that your module-c may not get the expected failure if your network is configured to return
+a special web page for HTTP requests with unknown hosts. This happened to my home internet (
+[Why did My MacBook Pro return different result?](
+https://github.com/GoogleCloudPlatform/cloud-opensource-java/issues/834#issuecomment-519585027))
